@@ -1,7 +1,8 @@
 <template>
+
   <div class="home">
     <el-container>
-      <el-header class="layout-header">页面的上半部分,顶栏
+      <el-header class="el-header">页面的上半部分,顶栏
 
       </el-header>
       <el-container class="layout-body">
@@ -12,29 +13,29 @@
               class="el-menu-vertical-demo">
 <!--              @open="handleOpen"-->
 <!--              @close="handleClose">-->
-            <el-submenu index="1">
+            <el-submenu class="el-submenu" index="/admin/user/list">
               <template slot="title">
                 <i class="el-icon-user"></i>
                 <span>用户管理</span>
               </template>
-                <el-menu-item index="/admin/user/list">用户列表</el-menu-item>
-                <el-menu-item index="/admin/user/add-new">添加用户</el-menu-item>
+                <el-menu-item class="el-menu-item" index="/admin/user/list">用户列表</el-menu-item>
+                <el-menu-item class="el-menu-item" index="/admin/user/add-new">添加用户</el-menu-item>
             </el-submenu>
-            <el-submenu index="/admin/brand/list">
+            <el-submenu class="el-submenu" index="/admin/brand/list">
             <template slot="title">
               <i class="el-icon-goods"></i>
               <span>品牌管理</span>
             </template>
-              <el-menu-item index="/admin/brand/list">品牌列表</el-menu-item>
-              <el-menu-item index="/admin/brand/add-new">添加品牌</el-menu-item>
+              <el-menu-item class="el-menu-item" index="/admin/brand/list">品牌列表</el-menu-item>
+              <el-menu-item class="el-menu-item" index="/admin/brand/add-new">添加品牌</el-menu-item>
             </el-submenu>
-            <el-submenu index="3">
+            <el-submenu class="el-submenu" index="/admin/category/list">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>商品管理</span>
               </template>
-              <el-menu-item index="/admin/category/list">商品列表</el-menu-item>
-              <el-menu-item index="/admin/category/add-new">添加商品</el-menu-item>
+              <el-menu-item class="el-menu-item" index="/admin/category/list">商品列表</el-menu-item>
+              <el-menu-item class="el-menu-item" index="/admin/category/add-new">添加商品</el-menu-item>
             </el-submenu>
           </el-menu>
         </el-aside>
@@ -46,13 +47,33 @@
   </div>
 </template>
 <style>
+
 *{
   margin: 0;
 }
-.layout-header{
-  background-color: #42b983;
-  color: #fcfcfc;
+.el-header {
+  /*border: 4px solid transparent;*/
+  border-radius: 2px;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(to right, #F78FAD, #FDEB82);
+  /*background-image: linear-gradient(to right, #F78FAD, #FDEB82),linear-gradient(90deg, #8F41E9, #578AEF);*/
 }
+
+.el-submenu{
+  border-radius: 2px;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(to right, #F5CCF6, #F1EEF9);
+}
+
+.el-menu-item{
+  border-radius: 2px;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(to right, #ABC7FF, #C1E3FF);
+}
+
 .layout-body{
   position: absolute;
   top: 60px;
@@ -61,12 +82,16 @@
   left: 0;
 }
 .layout-aside{
-  background-color: #7fffd4;
+  border-radius: 2px;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(to right, #99E5A2, #D4FC78);
 }
 .el-main{
   background-image: url("../assets/bg.png");
   background-size: cover; /* cover是专门用来设置全屏背景的 */
 }
+
 </style>
 <script>
 </script>
