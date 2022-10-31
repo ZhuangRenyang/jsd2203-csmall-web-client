@@ -5,25 +5,74 @@ import HomeView from '../views/HomeView.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    {
+        path: '/admin',//配置统一前缀
+        name: 'home',
+        component: HomeView,
+        //重定向
+        redirect: '/admin/user/list',
+        children: [
+            {
+                path: 'user/list',
+                component: () => import('../views/user/UserListView'),
+                meta: {
+                    title: '酷鲨商城-用户列表'
+                }
+            },
+            {
+                path: 'user/add-new',
+                component: () => import('../views/user/UserAddNewView'),
+                meta: {
+                    title: '酷鲨商城-添加用户'
+                }
+            },
+            {
+                path: 'category/list',
+                component:() => import('../views/category/CategoryListView'),
+                meta: {
+                    title: '酷鲨商城-商品列表'
+                }
+            },
+            {
+                path: 'category/add-new',
+                component:() => import ('../views/category/CategoryAddNewView'),
+                meta:{
+                    title: '酷鲨商城-添加商品类别'
+                }
+            },
+            {
+              path: 'brand/list',
+                component:() => import('../views/brand/BrandListView'),
+                meta: {
+                  title: '酷鲨商城-品牌列表'
+                }
+            },
+            {
+                path: 'brand/add-new',
+                component:() => import ('../views/brand/BrandAddNewView'),
+                meta:{
+                    title: '酷鲨商城-添加品牌'
+                }
+            }
+        ]
+    },
+    {
+        path: '/',
+        component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
+    },
+
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router
+
+router.beforeEach((to, from, next) => {
+
+    document.title = to.meta.title ? to.meta.title : "酷鲨商城管理平台";
+    next();
+})
