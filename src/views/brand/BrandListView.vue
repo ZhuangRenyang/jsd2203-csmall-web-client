@@ -1,12 +1,99 @@
 <template>
-<div>
-  <h3 style="color: aliceblue">品牌列表</h3>
-</div>
+  <div>
+    <el-card style="background-color: rgba(255,255,255,0.3)">
+      <br>
+      <h3>品牌列表</h3>
+      <el-breadcrumb separator-class="/">
+        <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item><a href="/admin/brand/list">品牌列表</a></el-breadcrumb-item>
+        <el-breadcrumb-item><a href="">品牌列表</a></el-breadcrumb-item>
+      </el-breadcrumb>
+      <br>
+      <el-table
+          :data="tableData"
+          border
+          style="width: 100%">
+        <el-table-column
+            prop="id"
+            label="id"
+            width="60">
+        </el-table-column>
+        <el-table-column
+            prop="name"
+            label="品牌名称"
+            width="100">
+        </el-table-column>
+        <el-table-column
+            prop="pinyin"
+            label="品牌拼音"
+            width="120">
+        </el-table-column>
+        <el-table-column
+            prop="logo"
+            label="品牌logo">
+        </el-table-column>
+        <el-table-column
+            prop="description"
+            label="品牌简介">
+        </el-table-column>
+        <el-table-column
+            prop="keywords"
+            label="关键词列表">
+        </el-table-column>
+        <el-table-column
+            prop="sales"
+            label="销量"
+            width="80">
+        </el-table-column>
+        <el-table-column
+            prop="productCount"
+            label="总量"
+            width="80">
+        </el-table-column>
+        <el-table-column
+            prop="sort"
+            label="序号"
+            width="80">
+        </el-table-column>
+        <el-table-column
+            prop="gmtCreate"
+            label="创建时间"
+            width="180">
+        </el-table-column>
+      </el-table>
+    </el-card>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "BrandListView"
+  data() {
+    return {
+      tableData: []
+    }
+  },
+  methods: {
+    loadBrands: function () {
+      let url = "http://localhost:9080/brands";
+      this.axios.get(url).then((response) => {
+        console.log(response.data);
+        let jsonResult = response.data;
+        if (jsonResult.code == 20000) {
+          this.tableData = jsonResult.data;
+        } else {
+          this.$message.error(jsonResult.message)
+        }
+      })
+    }
+  },
+  created() {//已创建，在mounted、显示页面之前执行
+    console.log("create")
+  },
+  mounted() {//已挂载，在created之后，在显示页面之前执行
+    console.log("mounted")
+    this.loadBrands();
+  }
+
 }
 </script>
 

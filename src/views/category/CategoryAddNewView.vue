@@ -1,7 +1,14 @@
 <template>
   <div>
     <el-card style="background-color: rgba(255,255,255,0.3)">
-      <h3>添加商品类别</h3>
+      <h3>添加类别</h3>
+      <br>
+      <el-breadcrumb separator-class="/">
+        <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item><a href="/admin/category/list">类别管理</a></el-breadcrumb-item>
+        <el-breadcrumb-item><a href="/admin/category/add-new">添加类别</a></el-breadcrumb-item>
+      </el-breadcrumb>
+      <br>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
         <el-form-item label="上级类别" prop="parentId" label-width="170px" class="item">
           <template>
@@ -16,13 +23,18 @@
         <el-form-item label="排序(排序值越小越靠前)" prop="sort" label-width="170px" class="item">
           <el-input style="width: 200px" type="text" v-model="ruleForm.sort"></el-input>
         </el-form-item>
-        <el-form-item label="是否启用" label-width="170px" class="item">
-          <el-radio v-model="ruleForm.depth" label="1">是</el-radio>
-          <el-radio v-model="ruleForm.depth" label="2">否</el-radio>
+        <el-form-item label="是否启用" prop="enable" label-width="170px" class="item">
+          <el-switch
+              v-model="ruleForm.enable"
+              active-value="1"
+              inactive-value="0"
+              active-color="#13ce66"
+              inactive-color="#faf8f9">
+          </el-switch>
         </el-form-item>
-        <el-form-item label="是否在导航栏中显示" label-width="170px" class="item">
-          <el-radio v-model="ruleForm.enable" label="1">是</el-radio>
-          <el-radio v-model="ruleForm.enable" label="2">否</el-radio>
+        <el-form-item label="是否在导航栏中显示" prop="isDisplay" label-width="170px" class="item">
+          <el-radio v-model="ruleForm.isDisplay" label="0">否</el-radio>
+          <el-radio v-model="ruleForm.isDisplay" label="1">是</el-radio>
         </el-form-item>
         <el-form-item label="商品图片(<=5M)" prop="icon" label-width="170px" class="item">
           <el-upload
@@ -62,8 +74,8 @@ export default {
         keywords:'',
         sort:'',
         icon:'',
-        depth: '1',
-        enable:'1',
+        isDisplay: '0',
+        enable:"0",
       },
       rules: {
         name: [

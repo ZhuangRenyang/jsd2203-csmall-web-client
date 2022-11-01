@@ -32,10 +32,19 @@
             <el-submenu class="el-submenu" index="/admin/category/list">
               <template slot="title">
                 <i class="el-icon-menu"></i>
+                <span>类别管理</span>
+              </template>
+              <el-menu-item class="el-menu-item" index="/admin/category/list">类别列表</el-menu-item>
+              <el-menu-item class="el-menu-item" index="/admin/category/add-new">添加类别</el-menu-item>
+            </el-submenu>
+
+            <el-submenu class="el-submenu" index="4">
+              <template slot="title">
+                <i class="el-icon-menu"></i>
                 <span>商品管理</span>
               </template>
-              <el-menu-item class="el-menu-item" index="/admin/category/list">商品列表</el-menu-item>
-              <el-menu-item class="el-menu-item" index="/admin/category/add-new">添加商品</el-menu-item>
+              <el-menu-item class="el-menu-item" index="">商品列表</el-menu-item>
+              <el-menu-item class="el-menu-item" index="">添加商品</el-menu-item>
             </el-submenu>
           </el-menu>
         </el-aside>
