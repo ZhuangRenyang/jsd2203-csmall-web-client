@@ -113,7 +113,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style>

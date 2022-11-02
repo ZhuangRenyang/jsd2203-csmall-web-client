@@ -43,6 +43,19 @@
             label="创建时间"
             width="180">
         </el-table-column>
+        <el-table-column prop="id" label="操作" width="180">
+          <template slot-scope="scope">
+            <el-button
+                size="mini"
+                @click="categoryEdit(scope.$index, scope.row)">编辑
+            </el-button>
+            <el-button
+                size="mini"
+                type="danger"
+                @click="categoryDelete(scope.$index, scope.row)">删除
+            </el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -67,6 +80,16 @@ export default {
           this.$message.error(jsonResult.message)
         }
       })
+    },
+    categoryEdit(index, row) {
+      console.log(index, row);
+    },
+    categoryDelete(index,row) {
+      let url = "http://localhost:9080/categories/delete?id="
+      this.axios.get(url+row.id).then(function(){
+
+      })
+
     }
   },
   created() {//已创建，在mounted、显示页面之前执行
