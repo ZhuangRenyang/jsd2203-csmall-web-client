@@ -60,6 +60,19 @@
             label="创建时间"
             width="180">
         </el-table-column>
+        <el-table-column prop="id" label="操作" width="180">
+          <template slot-scope="scope">
+            <el-button
+                size="mini"
+                @click=" brandEdit(scope.$index, scope.row)">编辑
+            </el-button>
+            <el-button
+                size="mini"
+                type="danger"
+                @click=" brandDelete(scope.$index, scope.row)">删除
+            </el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </el-card>
   </div>
@@ -83,6 +96,15 @@ export default {
         } else {
           this.$message.error(jsonResult.message)
         }
+      })
+    },
+    brandEdit(index, row) {
+      console.log(index, row);
+    },
+    brandDelete(index,row) {
+      let url = "http://localhost:9080/brands/delete?id="
+      this.axios.post(url,row).then(function(){
+        location.reload();
       })
     }
   },

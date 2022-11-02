@@ -12,8 +12,8 @@
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
         <el-form-item label="上级类别" prop="parentId" label-width="170px" class="item">
           <template>
-            <el-select style="width: 100px" placeholder="请选择">
-              <el-option></el-option>
+            <el-select v-model="resetForm.parentId" style="width: 100px" placeholder="请选择">
+              <el-option v-for="c in tableData" :label="c"></el-option>
             </el-select>
           </template>
         </el-form-item>
@@ -77,6 +77,7 @@ export default {
         isDisplay: '0',
         enable:"0",
       },
+      tableData: [1,2,3,4,5,6],
       rules: {
         name: [
           {required: true, message: '请输入类别名称', trigger: 'blur'},

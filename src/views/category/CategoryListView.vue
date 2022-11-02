@@ -86,10 +86,9 @@ export default {
     },
     categoryDelete(index,row) {
       let url = "http://localhost:9080/categories/delete?id="
-      this.axios.get(url+row.id).then(function(){
-
+      this.axios.post(url,row).then(function(){
+        location.reload();
       })
-
     }
   },
   created() {//已创建，在mounted、显示页面之前执行
