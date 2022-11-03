@@ -103,7 +103,7 @@ export default {
                 if (response.data.code == 20000) {
                   this.$message({
                     type: "success",
-                    message: "添加商品成功"
+                    message: "添加品牌成功"
                   })
                 } else {
                   this.$message.error(response.data.message)
