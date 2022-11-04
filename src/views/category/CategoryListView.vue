@@ -48,6 +48,8 @@
             <el-button
                 size="mini"
                 type="text"
+                prop="name"
+                v-model="ruleForm.name"
                 @click="categoryEditOpen(scope.row.id)">修改
             </el-button>
             <el-button
@@ -69,21 +71,11 @@ export default {
       tableData: [],
       ruleForm: {
         name: '',
-        pinyin: '',
-        logo: '',
-        categoryId: '',
-        description: '',
-        keywords: '',
-        sort: ''
       },
       rules: {
         name: [
           {required: true, message: '请输入品牌名称', trigger: 'blur'},
           {min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'blur'}
-        ],
-        pinyin: [
-          {required: true, message: '请输入品牌拼音', trigger: 'blur'},
-          {min: 2, max: 25, message: '长度在 2 到 25 个字符', trigger: 'blur'}
         ],
         // sort: [
         //   {pattern: "/^[1-9]{1}[0-9]?$/", message: '必须是0-99之间的数值', trigger: 'blur'},
@@ -110,11 +102,8 @@ export default {
         cancelButtonText: '取消',
         // inputPattern: "",
         // inputErrorMessage: '格式不正确'
-      }).then(({ name }) => {
-        this.$message({
-          type: 'success',
-          message: '修改成功'
-        });
+      }).then(({name}) => {
+          this.categoryEdit(id)
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -123,7 +112,19 @@ export default {
       });
     },
     categoryEdit(id) {
-      console.log(id);
+      let url = "http://localhost:9080/categories/"+id+"/update"
+      this.axios.post(url,name).then((response) =>{
+        let jsonResult = response.data;
+        if (jsonResult.code == 20000){
+          this.$message({
+            type: "success",
+            message: "修改品牌成功"
+          })
+        }else {
+          this.$message.error(response.data.message)
+        }
+        this.loadBrands();
+      })
     },
     openDeleteConfirm(id) {
       this.$confirm('此操作将永久删除类别数据, 是否继续?', '提示', {
