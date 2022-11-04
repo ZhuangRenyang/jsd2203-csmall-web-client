@@ -47,12 +47,13 @@
           <template slot-scope="scope">
             <el-button
                 size="mini"
-                @click="categoryEdit(scope.$index, scope.row)">编辑
+                type="text"
+                @click="categoryEditOpen(scope.row.id)">修改
             </el-button>
             <el-button
                 size="mini"
                 type="danger"
-                @click="categoryDelete(scope.$index, scope.row)">删除
+                @click="openDeleteConfirm(scope.row.id)">删除
             </el-button>
           </template>
         </el-table-column>
@@ -65,7 +66,29 @@
 export default {
   data() {
     return {
-      tableData: []
+      tableData: [],
+      ruleForm: {
+        name: '',
+        pinyin: '',
+        logo: '',
+        categoryId: '',
+        description: '',
+        keywords: '',
+        sort: ''
+      },
+      rules: {
+        name: [
+          {required: true, message: '请输入品牌名称', trigger: 'blur'},
+          {min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'blur'}
+        ],
+        pinyin: [
+          {required: true, message: '请输入品牌拼音', trigger: 'blur'},
+          {min: 2, max: 25, message: '长度在 2 到 25 个字符', trigger: 'blur'}
+        ],
+        // sort: [
+        //   {pattern: "/^[1-9]{1}[0-9]?$/", message: '必须是0-99之间的数值', trigger: 'blur'},
+        // ]
+      }
     }
   },
   methods: {
@@ -81,13 +104,54 @@ export default {
         }
       })
     },
-    categoryEdit(index, row) {
-      console.log(index, row);
+    categoryEditOpen(id) {
+      this.$prompt('请输入类别名称', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        // inputPattern: "",
+        // inputErrorMessage: '格式不正确'
+      }).then(({ name }) => {
+        this.$message({
+          type: 'success',
+          message: '修改成功'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
     },
-    categoryDelete(index,row) {
-      let url = "http://localhost:9080/categories/delete?id="
-      this.axios.post(url,row).then(function(){
-        location.reload();
+    categoryEdit(id) {
+      console.log(id);
+    },
+    openDeleteConfirm(id) {
+      this.$confirm('此操作将永久删除类别数据, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.categoryDelete(id)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        });
+      });
+    },
+    categoryDelete(id) {
+      let url = "http://localhost:9080/categories/"+id+"/delete";
+      this.axios.post(url).then((response)=>{
+        let jsonResult = response.data;
+        if (jsonResult.code == 20000){
+          this.$message({
+            type: "success",
+            message: "删除类别成功"
+          })
+        }else {
+          this.$message.error(response.data.message)
+        }
+        this.loadBrands();
       })
     }
   },
