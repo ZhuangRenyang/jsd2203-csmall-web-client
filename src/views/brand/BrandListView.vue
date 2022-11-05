@@ -28,8 +28,9 @@
         <el-table-column prop="sales" label="销量" width="80"></el-table-column>
         <el-table-column prop="productCount" label="总量" width="80"></el-table-column>
         <el-table-column prop="sort" label="序号" width="80"></el-table-column>
-        <el-table-column prop="gmtCreate" label="创建时间" width="180"></el-table-column>
-        <el-table-column prop="enable" label="是否启用" label-width="80px">
+        <el-table-column prop="gmtCreate" label="创建时间" width="160"></el-table-column>
+        <el-table-column prop="gmtModified" label="修改时间" width="160"></el-table-column>
+        <el-table-column prop="enable" label="是否启用" width="80px">
           <template slot-scope="scope">
             <el-switch
                 v-model="scope.row.enable"
@@ -44,7 +45,7 @@
           <template slot-scope="scope">
             <el-button
                 size="mini"
-                @click=" brandEdit(scope.row.id)">修改
+                @click=" brandEditOpen(scope.row.id)">修改
             </el-button>
             <el-button
                 size="mini"
@@ -78,17 +79,33 @@ export default {
         }
       })
     },
-    brandEdit(id) {
-      let url = "http://localhost:9080/brands/"+id+"/update"
+    brandEditOpen(id) {
+      this.$prompt('请输入类别名称', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        // inputPattern: "",
+        // inputErrorMessage: '格式不正确'
+      }).then(({value})=> {
+        this.brandEdit(id,value)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
+    },
+    brandEdit(id,value) {
+      let url = "http://localhost:9080/brands/"+id+"/update/"+value
       this.axios.post(url).then((response) => {
         if (response.data.code == 20000) {
           this.$message({
             type: "success",
-            message: "修改品牌成功"
+            message: "修改品牌名称成功"
           })
         } else {
           this.$message.error(response.data.message)
         }
+        this.loadBrands();
       })
       console.log(index,id);
     },

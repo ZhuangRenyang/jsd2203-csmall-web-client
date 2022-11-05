@@ -41,15 +41,17 @@
         <el-table-column
             prop="gmtCreate"
             label="创建时间"
-            width="180">
+            width="160">
+        </el-table-column>
+        <el-table-column
+            prop="gmtModified"
+            label="修改时间"
+            width="160">
         </el-table-column>
         <el-table-column prop="id" label="操作" width="180">
           <template slot-scope="scope">
             <el-button
                 size="mini"
-                type="text"
-                prop="name"
-                v-model="ruleForm.name"
                 @click="categoryEditOpen(scope.row.id)">修改
             </el-button>
             <el-button
@@ -73,13 +75,6 @@ export default {
         name: '',
       },
       rules: {
-        name: [
-          {required: true, message: '请输入品牌名称', trigger: 'blur'},
-          {min: 2, max: 15, message: '长度在 2 到 15 个字符', trigger: 'blur'}
-        ],
-        // sort: [
-        //   {pattern: "/^[1-9]{1}[0-9]?$/", message: '必须是0-99之间的数值', trigger: 'blur'},
-        // ]
       }
     }
   },
@@ -102,8 +97,9 @@ export default {
         cancelButtonText: '取消',
         // inputPattern: "",
         // inputErrorMessage: '格式不正确'
-      }).then(({name}) => {
-          this.categoryEdit(id)
+      }).then(({value})=> {
+        // this.ruleForm.name=value
+          this.categoryEdit(id,value)
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -111,14 +107,14 @@ export default {
         });
       });
     },
-    categoryEdit(id) {
-      let url = "http://localhost:9080/categories/"+id+"/update"
-      this.axios.post(url,name).then((response) =>{
+    categoryEdit(id,value) {
+      let url = "http://localhost:9080/categories/"+id+"/update/"+value
+      this.axios.post(url).then((response) =>{
         let jsonResult = response.data;
         if (jsonResult.code == 20000){
           this.$message({
             type: "success",
-            message: "修改品牌成功"
+            message: "修改类别名称成功"
           })
         }else {
           this.$message.error(response.data.message)

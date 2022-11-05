@@ -19,9 +19,9 @@
         <el-table-column prop="password" label="密码" width="120"></el-table-column>
         <!--        <el-table-column prop="logo" label="品牌logo"></el-table-column>-->
         <!--        <el-table-column prop="description" label="品牌简介"></el-table-column>-->
-        <el-table-column prop="nickname" label="昵称"></el-table-column>
-        <el-table-column prop="phone" label="手机号码" width="80"></el-table-column>
-        <el-table-column prop="email" label="电子邮箱" width="80"></el-table-column>
+        <el-table-column prop="nickname" label="昵称" width="100"></el-table-column>
+        <el-table-column prop="phone" label="手机号码" width="120"></el-table-column>
+        <el-table-column prop="email" label="电子邮箱" width="120"></el-table-column>
         <el-table-column prop="gmtCreate" label="创建时间" width="180"></el-table-column>
         <el-table-column prop="enable" label="是否启用" label-width="80px">
           <template slot-scope="scope">
@@ -101,7 +101,7 @@ export default {
       });
     },
     userDelete(id) {
-      let url = "http://localhost:9080/brands/"+id+"/delete"
+      let url = "http://localhost:9081/admins/"+id+"/delete"
       this.axios.post(url).then((response) =>{
         let jsonResult = response.data;
         if (jsonResult.code == 20000){
