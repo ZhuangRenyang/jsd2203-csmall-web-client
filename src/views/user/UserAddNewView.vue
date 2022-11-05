@@ -5,7 +5,7 @@
       <br>
       <el-breadcrumb separator-class="/">
         <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item><a href="/admin/category/list">类别管理</a></el-breadcrumb-item>
+        <el-breadcrumb-item><a href="/admin/user/list">类别管理</a></el-breadcrumb-item>
         <el-breadcrumb-item><a href="/admin/category/add-new">添加类别</a></el-breadcrumb-item>
       </el-breadcrumb>
       <br>
