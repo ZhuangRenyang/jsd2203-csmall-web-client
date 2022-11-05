@@ -38,7 +38,7 @@
           <template slot-scope="scope">
             <el-button
                 size="mini"
-                @click=" userEdit(scope.row.id)">修改
+                @click=" userEditOpen(scope.row.id)">修改
             </el-button>
             <el-button
                 size="mini"
@@ -72,19 +72,36 @@ export default {
         }
       })
     },
-    userEdit(id) {
-      // let url = "http://localhost:9080/brands/"+id+"/update"
-      // this.axios.post(url).then((response) => {
-      //   if (response.data.code == 20000) {
-      //     this.$message({
-      //       type: "success",
-      //       message: "修改品牌成功"
-      //     })
-      //   } else {
-      //     this.$message.error(response.data.message)
-      //   }
-      // })
-      // console.log(index,id);
+    userEditOpen(id) {
+      this.$prompt('请输入用户名称', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        // inputPattern: "",
+        // inputErrorMessage: '格式不正确'
+      }).then(({value})=> {
+        // this.ruleForm.name=value
+        this.userEdit(id,value)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
+    },
+    userEdit(id,value) {
+      let url = "http://localhost:9081/admins/"+id+"/update/"+value
+      this.axios.post(url).then((response) =>{
+        let jsonResult = response.data;
+        if (jsonResult.code == 20000){
+          this.$message({
+            type: "success",
+            message: "修改用户名称成功"
+          })
+        }else {
+          this.$message.error(response.data.message)
+        }
+        this.loadBrands();
+      })
     },
     openDeleteConfirm(id) {
       this.$confirm('此操作将永久删除用户数据, 是否继续?', '提示', {
