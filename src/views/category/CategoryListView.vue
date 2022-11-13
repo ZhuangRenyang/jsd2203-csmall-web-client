@@ -81,7 +81,8 @@ export default {
   methods: {
     loadBrands: function () {
       let url = "http://localhost:9080/categories";
-      this.axios.get(url).then((response) => {
+      this.axios.create({headers:{'Authorization':localStorage
+              .getItem('jwt')}}).get(url).then((response) => {
         console.log(response.data);
         let jsonResult = response.data;
         if (jsonResult.code == 20000) {
@@ -109,7 +110,8 @@ export default {
     },
     categoryEdit(id,value) {
       let url = "http://localhost:9080/categories/"+id+"/update/"+value
-      this.axios.post(url).then((response) =>{
+      this.axios.create({headers:{'Authorization':localStorage
+              .getItem('jwt')}}).post(url).then((response) =>{
         let jsonResult = response.data;
         if (jsonResult.code == 20000){
           this.$message({
@@ -138,7 +140,8 @@ export default {
     },
     categoryDelete(id) {
       let url = "http://localhost:9080/categories/"+id+"/delete";
-      this.axios.post(url).then((response)=>{
+      this.axios.create({headers:{'Authorization':localStorage
+              .getItem('jwt')}}).post(url).then((response)=>{
         let jsonResult = response.data;
         if (jsonResult.code == 20000){
           this.$message({

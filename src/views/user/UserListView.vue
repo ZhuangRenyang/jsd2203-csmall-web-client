@@ -22,7 +22,7 @@
         <el-table-column prop="phone" label="手机号码" width="120"></el-table-column>
         <el-table-column prop="email" label="电子邮箱" width="180"></el-table-column>
         <el-table-column prop="gmtCreate" label="创建时间" width="160"></el-table-column>
-        <el-table-column prop="gmtModified" label="创建时间" width="160"></el-table-column>
+        <el-table-column prop="gmtModified" label="修改时间" width="160"></el-table-column>
         <el-table-column prop="enable" label="是否启用" width="80px">
           <template slot-scope="scope">
             <el-switch
@@ -60,9 +60,12 @@ export default {
     }
   },
   methods: {
-    loadBrands: function () {
+    loadAdmins: function () {
       let url = "http://localhost:9081/admins";
-      this.axios.get(url).then((response) => {
+      let jwt = localStorage.getItem('jwt');
+      console.log(jwt);
+      this.axios.create({headers:{'Authorization':localStorage
+              .getItem('jwt')}}).get(url).then((response) => {
         console.log(response.data);
         let jsonResult = response.data;
         if (jsonResult.code == 20000) {
@@ -90,7 +93,8 @@ export default {
     },
     userEdit(id,value) {
       let url = "http://localhost:9081/admins/"+id+"/update/"+value
-      this.axios.post(url).then((response) =>{
+      let jwt = localStorage.getItem('jwt');
+      this.axios.create({headers:{'Authorization':localStorage.getItem('jwt')}}).post(url).then((response) =>{
         let jsonResult = response.data;
         if (jsonResult.code == 20000){
           this.$message({
@@ -100,7 +104,7 @@ export default {
         }else {
           this.$message.error(response.data.message)
         }
-        this.loadBrands();
+        this.loadAdmins();
       })
     },
     openDeleteConfirm(id) {
@@ -119,17 +123,18 @@ export default {
     },
     userDelete(id) {
       let url = "http://localhost:9081/admins/"+id+"/delete"
-      this.axios.post(url).then((response) =>{
+      let jwt = localStorage.getItem('jwt');
+      this.axios.create({headers:{'Authorization':localStorage.getItem('jwt')}}).post(url).then((response) =>{
         let jsonResult = response.data;
         if (jsonResult.code == 20000){
           this.$message({
             type: "success",
-            message: "删除品牌成功"
+            message: "删除用户成功"
           })
         }else {
           this.$message.error(response.data.message)
         }
-        this.loadBrands();
+        this.loadAdmins();
       })
     }
   },
@@ -138,7 +143,7 @@ export default {
   },
   mounted() {//已挂载，在created之后，在显示页面之前执行
     console.log("mounted")
-    this.loadBrands();
+    this.loadAdmins();
   }
 
 }

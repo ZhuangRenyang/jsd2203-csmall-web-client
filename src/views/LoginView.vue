@@ -41,18 +41,22 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // alert('submit!');
-          let url = "http://localhost:8080/login";
+          let url = "http://localhost:9081/admins/login";
           let dat = {
             username:this.ruleForm.username,
             password:this.ruleForm.password
           }
           this.axios.post(url,dat).then((response)=>{
-            if(response.data==1){
+            if(response.data.code==20000){
               this.$message({
                 message:'登录成功',
                 type:'success'
-              })
-            }else if (response.data==2){
+              });
+              let jwt = response.data.data;
+              console.log(jwt);
+              localStorage.setItem('jwt',jwt);
+              location.href="http://localhost:8080/admin/user/list"
+            }else if (response.data.code==59999){
               this.$message.error("用户名不存在!");
             }else {
               this.$message.error("密码错误!")

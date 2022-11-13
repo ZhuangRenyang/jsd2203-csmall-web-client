@@ -98,7 +98,8 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let url = "http://localhost:9080/brands/add-new"
-          this.axios.post(url, this.ruleForm).then((response) => {
+          this.axios.create({headers:{'Authorization':localStorage
+                  .getItem('jwt')}}).post(url, this.ruleForm).then((response) => {
                 console.log(response.data);
                 if (response.data.code == 20000) {
                   this.$message({

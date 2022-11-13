@@ -95,12 +95,14 @@
           this.$refs[formName].validate((valid) => {
             if (valid) {
               let url = "http://localhost:9081/admins/add-new"
-              this.axios.post(url, this.ruleForm).then((response) => {
+              let jwt = localStorage.getItem('jwt');
+              this.axios.create({headers:{'Authorization':localStorage.getItem('jwt')}})
+                  .post(url, this.ruleForm).then((response) => {
                     console.log(response.data);
                     if (response.data.code == 20000) {
                       this.$message({
                         type: "success",
-                        message: "添加类别成功"
+                        message: "添加管理员成功"
                       })
                     } else {
                       this.$message.error(response.data.message)
@@ -121,5 +123,7 @@
 </script>
 
 <style scoped>
-
+.item .el-form-item__label{
+  color: #acce8a;
+}
 </style>
