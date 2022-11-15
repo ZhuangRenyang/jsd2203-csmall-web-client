@@ -11,21 +11,21 @@
               router
               :default-active="this.$router.currentRoute.path"
               class="el-menu-vertical-demo">
-<!--              @open="handleOpen"-->
-<!--              @close="handleClose">-->
+            <!--              @open="handleOpen"-->
+            <!--              @close="handleClose">-->
             <el-submenu class="el-submenu" index="/admin/user/list">
               <template slot="title">
                 <i class="el-icon-user"></i>
                 <span>用户管理</span>
               </template>
-                <el-menu-item class="el-menu-item" index="/admin/user/list">用户列表</el-menu-item>
-                <el-menu-item class="el-menu-item" index="/admin/user/add-new">添加用户</el-menu-item>
+              <el-menu-item class="el-menu-item" index="/admin/user/list">用户列表</el-menu-item>
+              <el-menu-item class="el-menu-item" index="/admin/user/add-new">添加用户</el-menu-item>
             </el-submenu>
             <el-submenu class="el-submenu" index="/admin/brand/list">
-            <template slot="title">
-              <i class="el-icon-goods"></i>
-              <span>品牌管理</span>
-            </template>
+              <template slot="title">
+                <i class="el-icon-goods"></i>
+                <span>品牌管理</span>
+              </template>
               <el-menu-item class="el-menu-item" index="/admin/brand/list">品牌列表</el-menu-item>
               <el-menu-item class="el-menu-item" index="/admin/brand/add-new">添加品牌</el-menu-item>
             </el-submenu>
@@ -55,11 +55,13 @@
     </el-container>
   </div>
 </template>
+
 <style>
 
-*{
+* {
   margin: 0;
 }
+
 .el-header {
   /*border: 4px solid transparent;*/
   border-radius: 2px;
@@ -69,34 +71,36 @@
   /*background-image: linear-gradient(to right, #F78FAD, #FDEB82),linear-gradient(90deg, #8F41E9, #578AEF);*/
 }
 
-.el-submenu{
+.el-submenu {
   border-radius: 2px;
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
   background-image: linear-gradient(to right, #F5CCF6, #F1EEF9);
 }
 
-.el-menu-item{
+.el-menu-item {
   border-radius: 2px;
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
   background-image: linear-gradient(to right, #ABC7FF, #C1E3FF);
 }
 
-.layout-body{
+.layout-body {
   position: absolute;
   top: 60px;
   right: 0;
-  bottom:0;
+  bottom: 0;
   left: 0;
 }
-.layout-aside{
+
+.layout-aside {
   border-radius: 2px;
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
   background-image: linear-gradient(to right, #99E5A2, #D4FC78);
 }
-.el-main{
+
+.el-main {
   background-image: url("../assets/bg.png");
   background-size: cover; /* cover是专门用来设置全屏背景的 */
 }
