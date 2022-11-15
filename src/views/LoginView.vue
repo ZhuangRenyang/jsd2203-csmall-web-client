@@ -67,9 +67,9 @@ export default {
               localStorage.setItem('jwt', jwt);
               location.href = "http://localhost:8080/admin/user/list"
             } else if (response.data.code == 59999) {
-              this.$message.error("用户名不存在!");
+              this.$message.error("密码或用户名错误!");
             } else {
-              this.$message.error("密码错误!")
+              this.$message.error("用户名不存在!")
             }
           })
         } else {
