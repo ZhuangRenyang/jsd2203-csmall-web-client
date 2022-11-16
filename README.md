@@ -20,3 +20,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 **酷鲨商城前端后台项目**
+![](img.png)
+新增了看板娘
