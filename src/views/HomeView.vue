@@ -13,13 +13,13 @@
               class="el-menu-vertical-demo">
             <!--              @open="handleOpen"-->
             <!--              @close="handleClose">-->
-            <el-submenu class="el-submenu" index="/admin/user/list">
+            <el-submenu class="el-submenu" index="/admin/admins/list">
               <template slot="title">
                 <i class="el-icon-user"></i>
                 <span>用户管理</span>
               </template>
-              <el-menu-item class="el-menu-item" index="/admin/user/list">用户列表</el-menu-item>
-              <el-menu-item class="el-menu-item" index="/admin/user/add-new">添加用户</el-menu-item>
+              <el-menu-item class="el-menu-item" index="/admin/admins/list">用户列表</el-menu-item>
+              <el-menu-item class="el-menu-item" index="/admin/admins/add-new">添加用户</el-menu-item>
             </el-submenu>
             <el-submenu class="el-submenu" index="/admin/brand/list">
               <template slot="title">

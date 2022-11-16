@@ -41,7 +41,7 @@ export default {
         tagMode: false,
         debug: false,
         model: { jsonPath: '../live2dw/live2d-widget-model-haru_2/assets/haru02.model.json' },
-        display: { position: 'right', width: 350, height: 800 },  //调整大小,和位置
+        display: { position: 'right', width: 300, height: 600 },  //调整大小,和位置
         mobile: { show: true },   //要不要盯着你的鼠标看
         log: false,
       })

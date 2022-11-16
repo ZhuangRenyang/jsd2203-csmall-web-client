@@ -2,7 +2,7 @@
   <body>
   <div id="app">
     <br>
-    <h1>欢迎来到酷鲨商城</h1>
+    <h1>酷鲨商城管理平台</h1>
     <br>
     <h2>CoolSharkMall</h2>
     <br>
@@ -65,7 +65,7 @@ export default {
               let jwt = response.data.data;
               console.log(jwt);
               localStorage.setItem('jwt', jwt);
-              location.href = "http://localhost:8080/admin/user/list"
+              location.href = "http://localhost:8080/admin/admins/list"
             } else if (response.data.code == 59999) {
               this.$message.error("密码或用户名错误!");
             } else {

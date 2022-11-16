@@ -10,18 +10,18 @@ const routes = [
         name: 'home',
         component: HomeView,
         //重定向
-        redirect: '/admin/user/list',
+        redirect: 'admin/admins/list',
         children: [
             {
-                path: 'user/list',
-                component: () => import('../views/user/UserListView'),
+                path: 'admins/list',
+                component: () => import('../views/admins/AdminListView'),
                 meta: {
                     title: '酷鲨商城-用户列表'
                 }
             },
             {
-                path: 'user/add-new',
-                component: () => import('../views/user/UserAddNewView'),
+                path: 'admins/add-new',
+                component: () => import('../views/admins/AdminAddNewView'),
                 meta: {
                     title: '酷鲨商城-添加用户'
                 }
