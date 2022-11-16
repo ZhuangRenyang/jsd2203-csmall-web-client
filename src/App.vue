@@ -7,12 +7,13 @@
 </template>
 <script>
 import Live2d from '@/components/Live2d/index'
+
 export default {
 
   components: {
     Live2d
   },
-  name: 'App',
+  name: 'app',
   /*看板娘初始化
     参数说明
     model 模型的配置
@@ -40,9 +41,9 @@ export default {
         pluginModelPath: 'live2d-widget-model-haru_1/assets/', //中间这个haru_2就是你的老婆,想换个老婆,换这个就可以了
         tagMode: false,
         debug: false,
-        model: { jsonPath: '../live2dw/live2d-widget-model-haru_1/assets/haru01.model.json' },
-        display: { position: 'right', width: 300, height: 600 },  //调整大小,和位置
-        mobile: { show: true },   //要不要盯着你的鼠标看
+        model: {jsonPath: '../live2dw/live2d-widget-model-haru_1/assets/haru01.model.json'},
+        display: {position: 'right', width: 300, height: 600},  //调整大小,和位置
+        mobile: {show: true},   //要不要盯着你的鼠标看
         log: false,
       })
     }, 1000)
@@ -67,6 +68,7 @@ html {
   /*width: 100%;*/
   /*height: 100%;*/
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

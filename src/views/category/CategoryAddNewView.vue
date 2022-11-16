@@ -13,7 +13,7 @@
         <el-form-item label="上级类别" prop="parentId" label-width="170px" class="item">
           <template>
             <el-select v-model="resetForm.parentId" style="width: 100px" placeholder="请选择">
-              <el-option v-for="c in tableData" :label="c"></el-option>
+              <el-option></el-option>
             </el-select>
           </template>
         </el-form-item>
@@ -70,7 +70,7 @@ export default {
     return {
       ruleForm: {
         name: '',
-        parentId:'',
+        parentId:'2',
         keywords:'',
         sort:'',
         icon:'',

@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-card style="background-color: rgba(255,255,255,0.3)">
-      <h3>添加类别</h3>
+      <h3>添加用户</h3>
       <br>
       <el-breadcrumb separator-class="/">
         <el-breadcrumb-item :to="{ path: '/admin' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item><a href="/admin/admins/list">用户管理</a></el-breadcrumb-item>
+        <el-breadcrumb-item><a href="/admin/admins/list">用户列表</a></el-breadcrumb-item>
         <el-breadcrumb-item><a href="">添加用户</a></el-breadcrumb-item>
       </el-breadcrumb>
       <br>

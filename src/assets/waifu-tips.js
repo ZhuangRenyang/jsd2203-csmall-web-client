@@ -1,4 +1,3 @@
-
 window.live2d_settings = Array(); /*
 
     く__,.ヘヽ.　　　　/　,ー､ 〉
